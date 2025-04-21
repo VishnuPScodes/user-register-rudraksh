@@ -1,36 +1,43 @@
-import { useState } from 'react'
-import axios from 'axios'
-import './App.css'
+import { useState } from "react";
+import axios from "axios";
+import "./App.css";
 
 function App() {
   const [formData, setFormData] = useState({
-    name: '',
-    mobile: ''
-  })
-  const [message, setMessage] = useState('')
+    name: "",
+    mobile: "",
+  });
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5001/api/register', formData)
-      setMessage('Registration successful!')
-      setFormData({ name: '', mobile: '' })
+      const response = await axios.post(
+        "https://user-register-rudraksh.onrender.com/api/register",
+        formData
+      );
+      setMessage("Registration successful!");
+      setFormData({ name: "", mobile: "" });
     } catch (error) {
-      setMessage('Error registering user: ' + error.message)
+      setMessage("Error registering user: " + error.message);
     }
-  }
+  };
 
   return (
     <div className="app-container">
       <h1>User Registration</h1>
-      {message && <p className={message.includes('Error') ? 'error' : 'success'}>{message}</p>}
+      {message && (
+        <p className={message.includes("Error") ? "error" : "success"}>
+          {message}
+        </p>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
@@ -57,7 +64,7 @@ function App() {
         <button type="submit">Register</button>
       </form>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
