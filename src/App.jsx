@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
+import DotsLoader from "./component/DotsLoader";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -68,10 +69,14 @@ function App() {
             name="mobile"
             value={formData.mobile}
             onChange={handleChange}
+            maxLength={10}
+            minLength={10}
+            pattern="[0-9]{10}"
+            title="Please enter a valid 10-digit mobile number"
             required
           />
         </div>
-        <button type="submit">{loader ? "Loading" : "Register"} </button>
+        <button type="submit">{loader ? <DotsLoader /> : "Register"} </button>
       </form>
     </div>
   );
