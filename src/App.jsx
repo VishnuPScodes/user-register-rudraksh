@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 
@@ -8,6 +8,13 @@ function App() {
     mobile: "",
   });
   const [message, setMessage] = useState("");
+  const [loader, setLoader] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMessage("");
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [message]);
 
   const handleChange = (e) => {
     setFormData({
@@ -18,14 +25,17 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoader(true);
     try {
       const response = await axios.post(
         "https://user-register-rudraksh.onrender.com/api/register",
         formData
       );
+      setLoader(false);
       setMessage("Registration successful!");
       setFormData({ name: "", mobile: "" });
     } catch (error) {
+      setLoader(false);
       setMessage("Error registering user: " + error.message);
     }
   };
@@ -61,7 +71,7 @@ function App() {
             required
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit">{loader ? "Loading" : "Register"} </button>
       </form>
     </div>
   );
