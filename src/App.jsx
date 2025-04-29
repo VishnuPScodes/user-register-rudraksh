@@ -43,7 +43,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>User Registration</h1>
+      <h1>Diksha Registration</h1>
       {message && (
         <p className={message.includes("Error") ? "error" : "success"}>
           {message}
