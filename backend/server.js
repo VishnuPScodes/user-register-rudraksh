@@ -37,11 +37,15 @@ app.post("/api/register", async (req, res) => {
 // New endpoint to get users from Memunda temple
 app.get("/api/users/memunda", async (req, res) => {
   try {
-    const users = await User.find({ temple: "Memunda" });
+    const users = await User.find({ temple: "Memunda" }).sort({
+      createdAt: -1,
+    });
     const count = users.length;
     res.json({ users, count });
   } catch (error) {
-    res.status(500).json({ message: "Error fetching users", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error fetching users", error: error.message });
   }
 });
 
