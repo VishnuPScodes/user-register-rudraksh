@@ -39,11 +39,29 @@ export default function Users() {
     return <div className="error">{error}</div>;
   }
 
+  const exportDataToCSV = () => {
+    const csvData = [
+      ["Name", "Mobile"],
+      ...users.map((user) => [user.name, user.mobile]),
+    ].join("\n");
+    const blob = new Blob([csvData], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "users.csv";
+    a.click();
+  };
+
   return (
     <div className="users-container">
       <div className="users-header">
         <h2>Memunda Temple Regitrations</h2>
-        <div className="total-count">Total Count: {count}</div>
+        <div className="btn-container">
+          <div className="total-count">Total Count: {count}</div>
+          <div onClick={exportDataToCSV} className="total-count">
+            Export data
+          </div>
+        </div>
       </div>
       <div className="users-list">
         {users.map((user) => (

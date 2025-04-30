@@ -147,7 +147,7 @@ button:hover {
   .users-container {
     padding: 1rem;
   }
-  
+
   .users-header {
     flex-direction: column;
     gap: 1rem;
@@ -177,4 +177,10 @@ button:hover {
 
 .nav-link:hover {
   background-color: #eceeff;
+}
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
