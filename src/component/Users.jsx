@@ -55,7 +55,6 @@ export default function Users() {
   return (
     <div className="users-container">
       <div className="users-header">
-        <h2>Memunda Temple Regitrations</h2>
         <div className="btn-container">
           <div className="total-count">Total Count: {count}</div>
           <div onClick={exportDataToCSV} className="total-count">
